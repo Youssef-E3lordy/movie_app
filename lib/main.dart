@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
+import 'package:movie_app/features/popular/presentation/view/home.dart';
 import 'features/main_layout/presentation/screens/main_layout_screen.dart';
 
 void main() {
@@ -23,7 +24,7 @@ class MovieApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: Scaffold(body: MainLayoutScreen()),
+      home: Scaffold(body: Home()),
     );
   }
 }
