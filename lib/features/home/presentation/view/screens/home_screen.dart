@@ -6,7 +6,7 @@ import 'package:movie_app/features/home/data/repo/repository/home_repository_imp
 import 'package:movie_app/features/home/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_top_rated_movies_use_case.dart';
 import 'package:movie_app/features/home/presentation/view/widgets/title_section_widget.dart';
-import 'package:movie_app/features/home/presentation/view_model/popular_cubit.dart';
+import 'package:movie_app/features/home/presentation/view_model/home_cubit.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,12 +17,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  late PopularCubit _cubit;
+  late HomeCubit _cubit;
   void initState() {
     super.initState();
     var useCase1 = GetPopularMoviesUseCase(homeRepositoryInjectable());
     var useCase2 = GetTopRatedMoviesUseCase(homeRepositoryInjectable());
-    _cubit = PopularCubit(
+    _cubit = HomeCubit(
       getPopularMoviesUseCase: useCase1,
       getTopRatedMoviesUseCase: useCase2,
     );
@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<PopularCubit, HomeState>(
+        child: BlocBuilder<HomeCubit, HomeState>(
           bloc: _cubit,
           builder: (context, state) {
             if (state is Loading) {

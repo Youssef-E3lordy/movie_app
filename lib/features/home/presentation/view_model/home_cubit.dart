@@ -3,10 +3,10 @@ import 'package:movie_app/core/network/api_result.dart';
 import 'package:movie_app/features/home/domain/entities/home_entity.dart';
 import 'package:movie_app/features/home/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_top_rated_movies_use_case.dart';
-part 'popular_state.dart';
+part 'home_state.dart';
 
-class PopularCubit extends Cubit<HomeState> {
-  PopularCubit({
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit({
     required this.getPopularMoviesUseCase,
     required this.getTopRatedMoviesUseCase,
   }) : super(Loading());
