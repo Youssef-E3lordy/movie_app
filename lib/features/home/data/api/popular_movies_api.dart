@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/network/api_constant.dart';
 import 'package:movie_app/core/network/api_result.dart';
-import 'package:movie_app/features/popular/data/model/popular_model_dto.dart';
+import 'package:movie_app/features/home/data/model/home_model_dto.dart';
 
-class GetPopularMoviesApi {
-  Future<ApiResult<PopularModelDto>> getPopularMovies() async {
+class PopularMoviesApi {
+  Future<ApiResult<HomeModelDto>> getPopularMovies() async {
     try {
       Dio dio = Dio();
       var response = await dio.get(
@@ -15,12 +15,12 @@ class GetPopularMoviesApi {
           (response.statusCode ?? 400) < 300) {
         Map<String, dynamic> json = response.data;
 
-        return ApiSuccess<PopularModelDto>(PopularModelDto.fromJson(json));
+        return ApiSuccess<HomeModelDto>(HomeModelDto.fromJson(json));
       } else {
-        return ApiError<PopularModelDto>("Error");
+        return ApiError<HomeModelDto>("Error");
       }
     } catch (e) {
-      return ApiError<PopularModelDto>(e.toString());
+      return ApiError<HomeModelDto>(e.toString());
     }
   }
 }

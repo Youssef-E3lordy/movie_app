@@ -1,19 +1,14 @@
-import 'package:movie_app/features/popular/domain/entities/popular_entity.dart';
+import 'package:movie_app/features/home/domain/entities/home_entity.dart';
 
-class PopularModelDto {
+class HomeModelDto {
   int? page;
   List<ResultsDto>? results;
   int? totalPages;
   int? totalResults;
 
-  PopularModelDto({
-    this.page,
-    this.results,
-    this.totalPages,
-    this.totalResults,
-  });
+  HomeModelDto({this.page, this.results, this.totalPages, this.totalResults});
 
-  PopularModelDto.fromJson(Map<String, dynamic> json) {
+  HomeModelDto.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <ResultsDto>[];
@@ -25,8 +20,8 @@ class PopularModelDto {
     totalResults = json['total_results'];
   }
 
-  PopularEntity toEntity() {
-    return PopularEntity(
+  HomeEntity toEntity() {
+    return HomeEntity(
       page: page ?? 0,
       results: results?.map((e) => e.toEntity()).toList() ?? [],
       totalPages: totalPages ?? 0,
@@ -88,8 +83,8 @@ class ResultsDto {
     voteCount = json['vote_count'];
   }
 
-  Results toEntity() {
-    return Results(
+  ResultsEntity toEntity() {
+    return ResultsEntity(
       adult: adult ?? false,
       backdropPath: backdropPath ?? "",
       genreIds: genreIds ?? [],

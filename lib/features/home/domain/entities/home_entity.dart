@@ -1,10 +1,10 @@
-class PopularEntity {
+class HomeEntity {
   final int page;
-  final List<Results> results;
+  final List<ResultsEntity> results;
   final int totalPages;
   final int totalResults;
 
-  PopularEntity({
+  HomeEntity({
     this.page = 0,
     this.results = const [],
     this.totalPages = 0,
@@ -12,7 +12,7 @@ class PopularEntity {
   });
 }
 
-class Results {
+class ResultsEntity {
   final bool adult;
   final String backdropPath;
   final List<int> genreIds;
@@ -29,7 +29,7 @@ class Results {
   final double voteAverage;
   final int voteCount;
 
-  Results({
+  ResultsEntity({
     this.adult = false,
     this.backdropPath = "",
     this.genreIds = const [],
