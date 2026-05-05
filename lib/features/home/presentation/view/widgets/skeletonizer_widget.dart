@@ -30,6 +30,8 @@ class SkeletonizerWidget extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
               ),
             ),
+            SizedBox(height: 40),
+            TitleSectionWidget(title: 'Top Rated'),
             SizedBox(
               height: 250,
               child: ListView.builder(

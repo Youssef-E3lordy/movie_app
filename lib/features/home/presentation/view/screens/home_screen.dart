@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/network/api_constant.dart';
 import 'package:movie_app/core/widgets/app_cached_image.dart';
-import 'package:movie_app/features/home/data/repo/repository/home_repository_imp.dart';
 import 'package:movie_app/features/home/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_release_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_top_rated_movies_use_case.dart';
@@ -23,13 +22,10 @@ class _HomeState extends State<Home> {
   late HomeCubit _cubit;
   void initState() {
     super.initState();
-    var useCase1 = GetPopularMoviesUseCase(homeRepositoryInjectable());
-    var useCase2 = GetTopRatedMoviesUseCase(homeRepositoryInjectable());
-    var useCase3 = GetReleaseMoviesUseCase(homeRepositoryInjectable());
     _cubit = HomeCubit(
-      getPopularMoviesUseCase: useCase1,
-      getTopRatedMoviesUseCase: useCase2,
-      getReleaseMoviesUseCase: useCase3,
+      getPopularMoviesUseCase: getPopularMoviesUseCaseInjectable(),
+      getTopRatedMoviesUseCase: getTopRatedMoviesUseCaseInjectable(),
+      getReleaseMoviesUseCase: getReleaseMoviesUseCaseInjectable(),
     );
     _cubit.getMovies();
   }
@@ -112,11 +108,14 @@ class _HomeState extends State<Home> {
                           childAspectRatio: 145 / 100,
                         ),
                         itemBuilder: (context, index) {
-                          return AppCachedImage(
-                            imageUrl: ApiConstants.getFullImageUrl(
-                              state.popularMovies[index].posterPath,
+                          return InkWell(
+                            onTap: () {},
+                            child: AppCachedImage(
+                              imageUrl: ApiConstants.getFullImageUrl(
+                                state.popularMovies[index].posterPath,
+                              ),
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                            borderRadius: BorderRadius.circular(16),
                           );
                         },
                         itemCount: state.popularMovies.length,
