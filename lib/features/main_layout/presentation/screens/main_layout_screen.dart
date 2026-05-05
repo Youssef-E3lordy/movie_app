@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_app/core/utils/app_assets.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
+import 'package:movie_app/features/search/presentation/view/screens/search_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class MainLayoutScreen extends StatefulWidget {
@@ -28,9 +29,13 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
   List<Widget> _buildScreens() {
     return const [
-      Center(child: Text('Home Screen', style: TextStyle(color: Colors.white))),
-      Center(child: Text('Search Screen', style: TextStyle(color: Colors.white))),
-      Center(child: Text('Watchlist Screen', style: TextStyle(color: Colors.white))),
+      Center(
+        child: Text('Home Screen', style: TextStyle(color: Colors.white)),
+      ),
+      SearchScreen(),
+      Center(
+        child: Text('Watchlist Screen', style: TextStyle(color: Colors.white)),
+      ),
     ];
   }
 
@@ -41,7 +46,10 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           AppAssets.iconHome,
           width: 24,
           height: 24,
-          colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(
+            AppColors.primary,
+            BlendMode.srcIn,
+          ),
         ),
         inactiveIcon: SvgPicture.asset(
           AppAssets.iconHome,
@@ -58,7 +66,10 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           AppAssets.iconSearch,
           width: 24,
           height: 24,
-          colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(
+            AppColors.primary,
+            BlendMode.srcIn,
+          ),
         ),
         inactiveIcon: SvgPicture.asset(
           AppAssets.iconSearch,
@@ -75,7 +86,10 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           AppAssets.iconBookmark,
           width: 24,
           height: 24,
-          colorFilter: const ColorFilter.mode(AppColors.primary, BlendMode.srcIn),
+          colorFilter: const ColorFilter.mode(
+            AppColors.primary,
+            BlendMode.srcIn,
+          ),
         ),
         inactiveIcon: SvgPicture.asset(
           AppAssets.iconBookmark,
@@ -101,12 +115,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       backgroundColor: AppColors.background,
       stateManagement: true,
       decoration: const NavBarDecoration(
-        border: Border(
-          top: BorderSide(
-            color: AppColors.primary,
-            width: 1.5,
-          ),
-        ),
+        border: Border(top: BorderSide(color: AppColors.primary, width: 1.5)),
       ),
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(
