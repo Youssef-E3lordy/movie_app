@@ -4,6 +4,7 @@ import 'package:movie_app/core/network/api_constant.dart';
 import 'package:movie_app/core/widgets/app_cached_image.dart';
 import 'package:movie_app/features/home/data/repo/repository/home_repository_imp.dart';
 import 'package:movie_app/features/home/domain/use_case/get_popular_movies_use_case.dart';
+import 'package:movie_app/features/home/domain/use_case/get_release_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_top_rated_movies_use_case.dart';
 import 'package:movie_app/features/home/presentation/view/widgets/title_section_widget.dart';
 import 'package:movie_app/features/home/presentation/view_model/home_cubit.dart';
@@ -22,11 +23,13 @@ class _HomeState extends State<Home> {
     super.initState();
     var useCase1 = GetPopularMoviesUseCase(homeRepositoryInjectable());
     var useCase2 = GetTopRatedMoviesUseCase(homeRepositoryInjectable());
+    var useCase3 = GetReleaseMoviesUseCase(homeRepositoryInjectable());
     _cubit = HomeCubit(
       getPopularMoviesUseCase: useCase1,
       getTopRatedMoviesUseCase: useCase2,
+      getReleaseMoviesUseCase: useCase3,
     );
-    _cubit.getPopularMovies();
+    _cubit.getMovies();
   }
 
   @override
@@ -42,7 +45,31 @@ class _HomeState extends State<Home> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    TitleSectionWidget(title: 'Top Rated'),
+                    TitleSectionWidget(title: 'Release'),
+                    SizedBox(
+                      height: 250,
+
+                      child: ListView.builder(
+                        itemCount: state.releaseRatedMovies.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(right: 8),
+                            child: InkWell(
+                              onTap: () {},
+                              child: AppCachedImage(
+                                imageUrl: ApiConstants.getFullImageUrl(
+                                  state.releaseRatedMovies[index].posterPath,
+                                ),
+                                height: 210,
+                                width: 140,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                     SizedBox(
                       height: 250,
 

@@ -5,5 +5,6 @@ import 'package:movie_app/features/home/domain/repo/repository/home_repository.d
 class GetTopRatedMoviesUseCase {
   HomeRepository _repository;
   GetTopRatedMoviesUseCase(this._repository);
-  Future<ApiResult<HomeEntity>> invoke() => _repository.getTopRatedMovie();
+  Future<ApiResult<HomeEntity>> invoke() async =>
+      await _repository.getTopRatedMovie();
 }

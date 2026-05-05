@@ -9,31 +9,34 @@ class HomeRepositoryImp implements HomeRepository {
   final HomeDataSource _dataSource;
   @override
   Future<ApiResult<HomeEntity>> getPopularMovie() async {
-    try {
-      var result = await _dataSource.getPopularMovie();
-      switch (result) {
-        case ApiSuccess<HomeEntity>():
-          return ApiSuccess<HomeEntity>(result.data);
-        case ApiError<HomeEntity>():
-          return ApiError<HomeEntity>(result.message);
-      }
-    } catch (e) {
-      return ApiError<HomeEntity>(e.toString());
+    var result = await _dataSource.getPopularMovie();
+    switch (result) {
+      case ApiSuccess<HomeEntity>():
+        return ApiSuccess<HomeEntity>(result.data);
+      case ApiError<HomeEntity>():
+        return ApiError<HomeEntity>(result.message);
     }
   }
 
   @override
   Future<ApiResult<HomeEntity>> getTopRatedMovie() async {
-    try {
-      var result = await _dataSource.getTopRatedMovie();
-      switch (result) {
-        case ApiSuccess<HomeEntity>():
-          return ApiSuccess<HomeEntity>(result.data);
-        case ApiError<HomeEntity>():
-          return ApiError<HomeEntity>(result.message);
-      }
-    } catch (e) {
-      return ApiError<HomeEntity>(e.toString());
+    var result = await _dataSource.getTopRatedMovie();
+    switch (result) {
+      case ApiSuccess<HomeEntity>():
+        return ApiSuccess<HomeEntity>(result.data);
+      case ApiError<HomeEntity>():
+        return ApiError<HomeEntity>(result.message);
+    }
+  }
+
+  @override
+  Future<ApiResult<HomeEntity>> getReleaseRatedMovie() async {
+    var result = await _dataSource.getReleasedMovie();
+    switch (result) {
+      case ApiSuccess<HomeEntity>():
+        return ApiSuccess<HomeEntity>(result.data);
+      case ApiError<HomeEntity>():
+        return ApiError<HomeEntity>(result.message);
     }
   }
 }
