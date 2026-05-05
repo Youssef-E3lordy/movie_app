@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
+import 'package:movie_app/features/details/presentation/view/screens/details_screen.dart';
 import 'features/main_layout/presentation/screens/main_layout_screen.dart'; 
 
 void main() {
@@ -24,7 +25,7 @@ class MovieApp extends StatelessWidget {
         ),
       ),
       home:  Scaffold(
-        body: MainLayoutScreen(),
+        body: DetailsScreen(movieId: 238,),
       ),
     );
   }
