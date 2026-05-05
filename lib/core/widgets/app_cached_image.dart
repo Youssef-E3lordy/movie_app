@@ -29,9 +29,9 @@ class AppCachedImage extends StatelessWidget {
         width: width,
         height: height,
         color: Theme.of(context).colorScheme.surface,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
+        // child: Center(
+        //   child: CircularProgressIndicator(),
+        // ),
       ),
       errorWidget: (context, url, error) => Container(
         width: width,
@@ -42,10 +42,7 @@ class AppCachedImage extends StatelessWidget {
     );
 
     if (borderRadius != null) {
-      return ClipRRect(
-        borderRadius: borderRadius!,
-        child: image,
-      );
+      return ClipRRect(borderRadius: borderRadius!, child: image);
     }
 
     return image;

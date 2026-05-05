@@ -6,8 +6,10 @@ import 'package:movie_app/features/home/data/repo/repository/home_repository_imp
 import 'package:movie_app/features/home/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_release_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_top_rated_movies_use_case.dart';
+import 'package:movie_app/features/home/presentation/view/widgets/skeletonizer_widget.dart';
 import 'package:movie_app/features/home/presentation/view/widgets/title_section_widget.dart';
 import 'package:movie_app/features/home/presentation/view_model/home_cubit.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -40,7 +42,7 @@ class _HomeState extends State<Home> {
           bloc: _cubit,
           builder: (context, state) {
             if (state is Loading) {
-              return Center(child: CircularProgressIndicator());
+              return SkeletonizerWidget();
             } else if (state is Success) {
               return SingleChildScrollView(
                 child: Column(
@@ -70,6 +72,8 @@ class _HomeState extends State<Home> {
                         },
                       ),
                     ),
+                    SizedBox(height: 40),
+                    TitleSectionWidget(title: 'Top Rated'),
                     SizedBox(
                       height: 250,
 
