@@ -52,13 +52,16 @@ class _HomeState extends State<Home> {
                         itemBuilder: (context, index) {
                           return Container(
                             margin: EdgeInsets.only(right: 8),
-                            child: AppCachedImage(
-                              imageUrl: ApiConstants.getFullImageUrl(
-                                state.topRatedMovies[index].posterPath,
+                            child: InkWell(
+                              onTap: () {},
+                              child: AppCachedImage(
+                                imageUrl: ApiConstants.getFullImageUrl(
+                                  state.topRatedMovies[index].posterPath,
+                                ),
+                                height: 210,
+                                width: 140,
+                                borderRadius: BorderRadius.circular(16),
                               ),
-                              height: 210,
-                              width: 140,
-                              borderRadius: BorderRadius.circular(16),
                             ),
                           );
                         },
