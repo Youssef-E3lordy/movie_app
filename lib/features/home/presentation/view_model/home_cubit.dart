@@ -44,7 +44,9 @@ class HomeCubit extends Cubit<HomeState> {
       case ApiError():
         releaseRatedMovies = [];
     }
-    if (popularMovies.isEmpty && topRatedMovies.isEmpty) {
+    if (popularMovies.isEmpty &&
+        topRatedMovies.isEmpty &&
+        releaseRatedMovies.isEmpty) {
       emit(Error('Error Try Again'));
     } else {
       emit(

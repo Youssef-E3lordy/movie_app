@@ -10,34 +10,19 @@ class HomeRepositoryImp implements HomeRepository {
   @override
   Future<ApiResult<HomeEntity>> getPopularMovie() async {
     var result = await _dataSource.getPopularMovie();
-    switch (result) {
-      case ApiSuccess<HomeEntity>():
-        return ApiSuccess<HomeEntity>(result.data);
-      case ApiError<HomeEntity>():
-        return ApiError<HomeEntity>(result.message);
-    }
+    return result;
   }
 
   @override
   Future<ApiResult<HomeEntity>> getTopRatedMovie() async {
     var result = await _dataSource.getTopRatedMovie();
-    switch (result) {
-      case ApiSuccess<HomeEntity>():
-        return ApiSuccess<HomeEntity>(result.data);
-      case ApiError<HomeEntity>():
-        return ApiError<HomeEntity>(result.message);
-    }
+    return result;
   }
 
   @override
   Future<ApiResult<HomeEntity>> getReleaseRatedMovie() async {
     var result = await _dataSource.getReleasedMovie();
-    switch (result) {
-      case ApiSuccess<HomeEntity>():
-        return ApiSuccess<HomeEntity>(result.data);
-      case ApiError<HomeEntity>():
-        return ApiError<HomeEntity>(result.message);
-    }
+    return result;
   }
 }
 
