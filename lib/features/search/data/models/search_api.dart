@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
-
-
-
+import 'package:injectable/injectable.dart';
+@singleton
 class ApiSearchService {
   final Dio dio;
 
@@ -11,9 +10,6 @@ class ApiSearchService {
     required String endpoint,
     Map<String, dynamic>? queryParameters,
   }) async {
-    return await dio.get(
-      endpoint,
-      queryParameters: queryParameters,
-    );
+    return await dio.get(endpoint, queryParameters: queryParameters);
   }
 }

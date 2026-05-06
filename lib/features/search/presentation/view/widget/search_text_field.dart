@@ -9,8 +9,12 @@ class TextFormFeildWidget extends StatefulWidget {
     required this.hintText,
     required this.validator,
     this.suffixIcon,
+    required this.onPressed,
+    required this.onFieldSubmitted,
   });
   IconData? suffixIcon;
+  void Function() onPressed;
+  final Function(String) onFieldSubmitted;
 
   TextEditingController? controller;
 
@@ -27,11 +31,11 @@ class _TextFormFeildState extends State<TextFormFeildWidget> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
-
+      onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
         suffixIcon: widget.suffixIcon != null
             ? IconButton(
-                onPressed: () {},
+                onPressed: widget.onPressed,
                 icon: Icon(Icons.search, color: AppColors.surface),
               )
             : null,

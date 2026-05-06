@@ -1,12 +1,13 @@
-class SearchModel {
+
+class SearchModelDto {
   int? page;
   List<MovieModel>? results;
   int? totalPages;
   int? totalResults;
 
-  SearchModel({this.page, this.results, this.totalPages, this.totalResults});
+  SearchModelDto({this.page, this.results, this.totalPages, this.totalResults});
 
-  SearchModel.fromJson(Map<String, dynamic> json) {
+  SearchModelDto.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <MovieModel>[];
@@ -58,7 +59,7 @@ class MovieModel {
   MovieModel.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
-    genreIds = json['genre_ids'].cast<int>();
+    genreIds = (json['genre_ids'] as List?)?.cast<int>() ?? [];
     id = json['id'];
     title = json['title'];
     originalLanguage = json['original_language'];

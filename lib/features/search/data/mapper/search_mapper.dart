@@ -1,6 +1,7 @@
-import 'package:movie_app/features/search/data/models/search_model.dart';
+import 'package:movie_app/features/search/data/models/search_model_dto.dart';
 import 'package:movie_app/features/search/domain/entites/search_entity.dart';
-extension SearchMapper on SearchModel {
+
+extension SearchMapper on SearchModelDto {
   SearchEntity toEntity() {
     return SearchEntity(
       page: page??0,
