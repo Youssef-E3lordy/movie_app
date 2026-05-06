@@ -3,18 +3,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movie_app/core/utils/app_assets.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/search/presentation/view/screens/search_screen.dart';
+import 'package:movie_app/features/home/presentation/view/screens/home_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
 class MainLayoutScreen extends StatefulWidget {
   const MainLayoutScreen({super.key});
-
   @override
   State<MainLayoutScreen> createState() => _MainLayoutScreenState();
 }
-
 class _MainLayoutScreenState extends State<MainLayoutScreen> {
   late PersistentTabController _controller;
-
   @override
   void initState() {
     super.initState();
@@ -29,10 +26,17 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
   List<Widget> _buildScreens() {
     return const [
+
       Center(
         child: Text('Home Screen', style: TextStyle(color: Colors.white)),
       ),
       SearchScreen(),
+
+      Home(),
+      Center(
+        child: Text('Search Screen', style: TextStyle(color: Colors.white)),
+      ),
+
       Center(
         child: Text('Watchlist Screen', style: TextStyle(color: Colors.white)),
       ),

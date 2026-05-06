@@ -17,3 +17,4 @@ abstract class AppColors {
   static const Color darkWhite = Color(0xFFECECEC);
   static const Color lightDark = Color(0xff252836);
 }
+//#25283652
