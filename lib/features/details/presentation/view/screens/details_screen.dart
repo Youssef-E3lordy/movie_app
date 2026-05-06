@@ -111,12 +111,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
                           const SizedBox(height: 15),
 
-                          Center(
-                            child: TagWidgets(
-                              runtime: data?.runtime.toString() ?? "120",
-                              releaseDate:
-                                  data?.releaseDate.split("-").first ?? "2024",
-                              genresName: data?.genres.join(", ") ?? "Action",
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Center(
+                              child: TagWidgets(
+                                runtime: data?.runtime.toString() ?? "120",
+                                releaseDate:
+                                    data?.releaseDate.split("-").first ??
+                                    "2024",
+                                genresName: data?.genres.join(", ") ?? "Action",
+                              ),
                             ),
                           ),
 

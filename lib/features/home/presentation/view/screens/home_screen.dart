@@ -8,7 +8,9 @@ import 'package:movie_app/features/home/domain/use_case/get_top_rated_movies_use
 import 'package:movie_app/features/home/presentation/view/widgets/skeletonizer_widget.dart';
 import 'package:movie_app/features/home/presentation/view/widgets/title_section_widget.dart';
 import 'package:movie_app/features/home/presentation/view_model/home_cubit.dart';
+import 'package:movie_app/features/details/presentation/view/screens/details_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+// import 'details/presentation/view/screens/details_screen.dart'
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -43,32 +45,6 @@ class _HomeState extends State<Home> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    TitleSectionWidget(title: 'Release'),
-                    SizedBox(
-                      height: 250,
-
-                      child: ListView.builder(
-                        itemCount: state.releaseRatedMovies.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: EdgeInsets.only(right: 8),
-                            child: InkWell(
-                              onTap: () {},
-                              child: AppCachedImage(
-                                imageUrl: ApiConstants.getFullImageUrl(
-                                  state.releaseRatedMovies[index].posterPath,
-                                ),
-                                height: 210,
-                                width: 140,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 40),
                     TitleSectionWidget(title: 'Top Rated'),
                     SizedBox(
                       height: 250,
@@ -80,7 +56,15 @@ class _HomeState extends State<Home> {
                           return Container(
                             margin: EdgeInsets.only(right: 8),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailsScreen(
+                                      movieId: state.topRatedMovies[index].id,
+                                    ),
+                                  ),
+                                );
+                              },
                               child: AppCachedImage(
                                 imageUrl: ApiConstants.getFullImageUrl(
                                   state.topRatedMovies[index].posterPath,
@@ -94,6 +78,42 @@ class _HomeState extends State<Home> {
                         },
                       ),
                     ),
+                    SizedBox(height: 40),
+                    TitleSectionWidget(title: 'Release'),
+                    SizedBox(
+                      height: 250,
+
+                      child: ListView.builder(
+                        itemCount: state.releaseRatedMovies.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(right: 8),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailsScreen(
+                                      movieId:
+                                          state.releaseRatedMovies[index].id,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: AppCachedImage(
+                                imageUrl: ApiConstants.getFullImageUrl(
+                                  state.releaseRatedMovies[index].posterPath,
+                                ),
+                                height: 210,
+                                width: 140,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
                     SizedBox(height: 40),
                     TitleSectionWidget(title: 'Popular'),
                     SizedBox(
@@ -109,7 +129,15 @@ class _HomeState extends State<Home> {
                         ),
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsScreen(
+                                    movieId: state.popularMovies[index].id,
+                                  ),
+                                ),
+                              );
+                            },
                             child: AppCachedImage(
                               imageUrl: ApiConstants.getFullImageUrl(
                                 state.popularMovies[index].posterPath,
