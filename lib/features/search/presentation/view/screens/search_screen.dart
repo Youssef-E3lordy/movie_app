@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/di/service_locator.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/widgets/empty_state.dart';
+import 'package:movie_app/features/details/presentation/view/screens/details_screen.dart';
 import 'package:movie_app/features/search/domain/entites/search_entity.dart';
 import 'package:movie_app/features/search/presentation/view/widget/movie_card_search_widget.dart';
 import 'package:movie_app/features/search/presentation/view/widget/search_text_field.dart';
@@ -94,7 +95,18 @@ class _SearchScreenState extends State<SearchScreen> {
                       }
                       return ListView.builder(
                         itemBuilder: (context, index) {
-                          return MoviesCard(movie: state.movies[index]);
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsScreen(
+                                    movieId: state.movies[index].id,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: MoviesCard(movie: state.movies[index]),
+                          );
                         },
                         itemCount: state.movies.length,
                       );

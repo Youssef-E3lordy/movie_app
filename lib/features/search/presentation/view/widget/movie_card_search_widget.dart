@@ -107,10 +107,7 @@ class MoviesCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      ApiConstants.getMovieDetails(movie.id),
-                      style: TextStyle(color: AppColors.darkWhite),
-                    ),
+                    Text("", style: TextStyle(color: AppColors.darkWhite)),
                   ],
                 ),
               ],
