@@ -16,16 +16,16 @@ class TagWidgets extends StatelessWidget {
        
         children: [
           SvgPicture.asset(AppAssets.calendarBlank),
-          Text(" $releaseDate"),
+          Text(" $releaseDate |"),
 
           const SizedBox(width: 4),
          
           SvgPicture.asset(AppAssets.clock),
-          Text(" $runtime  Minutes"),
+          Text(" $runtime  Minutes |"),
           const SizedBox(width: 4),
 
           SvgPicture.asset(AppAssets.ticket),
-          Text(" $genresName"),
+          Text(" $genresName "),
         ],
       ),
     );

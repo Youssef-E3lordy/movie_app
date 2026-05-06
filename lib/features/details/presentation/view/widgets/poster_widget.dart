@@ -9,17 +9,32 @@ class CustomPosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: ApiConstants.getFullImageUrl(posterUrl),
-      imageBuilder: (context, imageProvider) => Container(
-        width: 95,
-        height: 120,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-        ),
+    if (posterUrl.isEmpty) {
+    return Container(
+      width: 95,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade800,
+        borderRadius: BorderRadius.circular(16),
       ),
-     
     );
   }
-}
+
+  return CachedNetworkImage(
+    imageUrl: ApiConstants.getFullImageUrl(posterUrl),
+    imageBuilder: (context, imageProvider) => Container(
+      width: 95,
+      height: 120,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        image: DecorationImage(
+          image: imageProvider,
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
+  );
+  }
+
+  
+  }
