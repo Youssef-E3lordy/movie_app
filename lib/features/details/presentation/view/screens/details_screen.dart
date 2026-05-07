@@ -73,7 +73,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     final data = state is MovieDetailsSuccessState
                         ? state.data
                         : null;
-
                     return Skeletonizer(
                       enabled: isLoading,
                       child: Column(
@@ -81,12 +80,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           Stack(
                             children: [
                               const SizedBox(height: 320),
-
                               BackDropWidget(
                                 backdropPath: data?.backdropPath ?? "",
                                 rateValue: data?.voteAverage ?? 0,
                               ),
-
                               Positioned(
                                 bottom: 25,
                                 left: 15,
