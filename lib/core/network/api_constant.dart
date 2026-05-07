@@ -18,4 +18,3 @@ class ApiConstants {
   static const String prefixImageUrl = "https://image.tmdb.org/t/p/w500";
   static String getFullImageUrl(String imagePath) => "$prefixImageUrl$imagePath";
 }
-//https://api.themoviedb.org/3/search/movie&apiKey=9d7f94be913eddf2db40e317d2f12f36
