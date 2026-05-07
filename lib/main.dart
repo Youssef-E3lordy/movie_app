@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/di/service_locator.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
+import 'core/local_storage/hive_service.dart';
 import 'features/main_layout/presentation/screens/main_layout_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  configureDependencies();
-  runApp(MovieApp());
+  await HiveService.init();
+  runApp(const MovieApp());
 }
 
 class MovieApp extends StatelessWidget {
@@ -25,7 +25,7 @@ class MovieApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: Scaffold(body: MainLayoutScreen()),
+      home: const MainLayoutScreen(),
     );
   }
 }
