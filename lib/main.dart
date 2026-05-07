@@ -39,5 +39,3 @@ class MovieApp extends StatelessWidget {
   }
 }
 
-
-//
