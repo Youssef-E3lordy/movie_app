@@ -50,7 +50,7 @@ class MoviesCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      "${movie.voteAverage}",
+                      " ${movie.voteAverage.round()}",
                       style: TextStyle(color: AppColors.accent),
                     ),
                   ],
