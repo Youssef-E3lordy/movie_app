@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movie_app/core/local_storage/hive_models/movie_hive_model.dart';
 import 'package:movie_app/core/utils/app_assets.dart';
-
 import 'package:movie_app/core/widgets/custom_app_bar.dart';
 import 'package:movie_app/features/details/domin/use_case/movie_details_use_case.dart';
 import 'package:movie_app/features/details/domin/use_case/similar_movies_use_case.dart';
@@ -11,6 +11,8 @@ import 'package:movie_app/features/details/presentation/view/widgets/tag_widgets
 import 'package:movie_app/features/details/presentation/view_model/details_cubit.dart';
 import 'package:movie_app/features/details/presentation/view_model/details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/features/watch_list/presentation/view_model/watchlist_cubit.dart';
+import 'package:movie_app/features/watch_list/presentation/view_model/watchlist_state.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -28,16 +30,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   void initState() {
     super.initState();
-
     _detailsCubit = DetailsCubit(getMovieDetailsUseCaseInjector());
-
     _similarCubit = SimilarMoviesCubit(getSimilarMoviesUseCaseInjector());
-
     _detailsCubit.fetchMovieDetails(widget.movieId);
     _similarCubit.fetchSimilarMovies(widget.movieId);
   }
 
-  bool isBookMarked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,14 +44,34 @@ class _DetailsScreenState extends State<DetailsScreen> {
         showBackButton: true,
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: SvgPicture.asset(
-              isBookMarked ? AppAssets.yellowBookMark : AppAssets.bookMark,
-            ),
-            onPressed: () {
-              setState(() {
-                isBookMarked = !isBookMarked;
-              });
+          BlocBuilder<WatchlistCubit, WatchlistState>(
+            builder: (context, watchlistState) {
+              final isSaved = context.read<WatchlistCubit>().repository.isSaved(
+                widget.movieId,
+              );
+
+              return BlocBuilder<DetailsCubit, MovieDetailsState>(
+                bloc: _detailsCubit,
+                builder: (context, detailsState) {
+                  return IconButton(
+                    icon: SvgPicture.asset(
+                      isSaved ? AppAssets.yellowBookMark : AppAssets.bookMark,
+                    ),
+                    onPressed: () {
+                      if (detailsState is MovieDetailsSuccessState) {
+                        final movieToSave = MovieHiveModel(
+                          id: widget.movieId,
+                          title: detailsState.data.title,
+                          posterPath: detailsState.data.posterPath,
+                        );
+                        context.read<WatchlistCubit>().toggleWatchlist(
+                          movieToSave,
+                        );
+                      }
+                    },
+                  );
+                },
+              );
             },
           ),
         ],
@@ -81,12 +99,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           Stack(
                             children: [
                               const SizedBox(height: 320),
-
                               BackDropWidget(
                                 backdropPath: data?.backdropPath ?? "",
                                 rateValue: data?.voteAverage ?? 0,
                               ),
-
                               Positioned(
                                 bottom: 25,
                                 left: 15,
@@ -94,7 +110,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   posterUrl: data?.posterPath ?? "",
                                 ),
                               ),
-
                               Positioned(
                                 bottom: 40,
                                 left: 120,
@@ -108,9 +123,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ],
                           ),
-
                           const SizedBox(height: 15),
-
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Center(
@@ -123,7 +136,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ),
                           ),
-
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
@@ -136,12 +148,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     );
                   },
                 ),
-
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 BlocBuilder<SimilarMoviesCubit, SimilarMoviesState>(
                   builder: (context, state) {
                     final isLoading = state is SimilarMoviesLoadingState;
-
                     final movies = state is SimilarMoviesSuccessState
                         ? state.data
                         : List.generate(6, (_) => null);
@@ -162,7 +172,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                         itemBuilder: (context, index) {
                           final movie = movies[index];
-
                           return GestureDetector(
                             onTap: () {
                               if (movie != null) {

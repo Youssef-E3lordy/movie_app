@@ -1,5 +1,5 @@
-import '../../../../core/local_storage/hive_models/movie_hive_model.dart';
-import '../../../../core/local_storage/hive_service.dart';
+import 'package:movie_app/core/local_storage/hive_models/movie_hive_model.dart';
+import 'package:movie_app/core/local_storage/hive_service.dart';
 
 class WatchlistRepository {
   List<MovieHiveModel> getSavedMovies() {
