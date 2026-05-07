@@ -11,9 +11,11 @@ class TextFormFeildWidget extends StatefulWidget {
     this.suffixIcon,
     required this.onPressed,
     required this.onFieldSubmitted,
+required this.onChanged
   });
   IconData? suffixIcon;
   void Function() onPressed;
+  Function(String)? onChanged;
   final Function(String) onFieldSubmitted;
 
   TextEditingController? controller;
@@ -30,6 +32,7 @@ class _TextFormFeildState extends State<TextFormFeildWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        onChanged:widget.onChanged,
       controller: widget.controller,
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(

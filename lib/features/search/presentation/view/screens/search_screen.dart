@@ -38,6 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
               Builder(
                 builder: (context) {
                   return TextFormFeildWidget(
+                    onChanged: (value) {
+                      context.read<SearchCubit>().searchMovie(search.text);
+                    },
                     controller: search,
                     hintText: "Search",
                     suffixIcon: Icons.search,
