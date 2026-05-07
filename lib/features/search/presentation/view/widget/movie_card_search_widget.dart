@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movie_app/core/network/api_constant.dart';
@@ -16,7 +18,6 @@ class MoviesCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// IMAGE
           AppCachedImage(
             imageUrl: ApiConstants.getFullImageUrl(movie.posterPath),
             borderRadius: BorderRadius.circular(10),
@@ -32,7 +33,6 @@ class MoviesCard extends StatelessWidget {
                 Text(
                   movie.title,
                   maxLines: 1,
-
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(color: AppColors.whiteGray, fontSize: 16),
                 ),
@@ -50,7 +50,7 @@ class MoviesCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      " ${movie.voteAverage.round()}",
+                      movie.voteAverage.toStringAsFixed(1),
                       style: TextStyle(color: AppColors.accent),
                     ),
                   ],
@@ -107,7 +107,10 @@ class MoviesCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Text("", style: TextStyle(color: AppColors.darkWhite)),
+                    Text(
+                      "${100 + Random().nextInt(101)}",
+                      style: TextStyle(color: AppColors.darkWhite),
+                    ),
                   ],
                 ),
               ],
