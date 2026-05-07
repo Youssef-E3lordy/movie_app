@@ -30,8 +30,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   List<Widget> _buildScreens() {
     return const [
       Home(),
-      SearchScreen(),
-      
+      SearchScreen(),   
       WatchlistScreen(),
     ];
   }

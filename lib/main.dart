@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:movie_app/core/di/service_locator.dart';
-=======
 import 'package:flutter_bloc/flutter_bloc.dart';
->>>>>>> df334ac (feat: enhance watchlist UI and functionality with improved state management and error handling)
+import 'package:movie_app/core/di/service_locator.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/watch_list/data/repo/watchlist_repository.dart';
 import 'package:movie_app/features/watch_list/presentation/view_model/watchlist_cubit.dart';
@@ -13,6 +10,9 @@ import 'features/main_layout/presentation/screens/main_layout_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService.init();
+
+  configureDependencies();
+
   runApp(const MovieApp());
 }
 
@@ -24,7 +24,8 @@ class MovieApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => WatchlistCubit(WatchlistRepository())..loadWatchlist(),
+          create: (context) =>
+              WatchlistCubit(WatchlistRepository())..loadWatchlist(),
         ),
       ],
       child: MaterialApp(
@@ -42,4 +43,3 @@ class MovieApp extends StatelessWidget {
     );
   }
 }
-
