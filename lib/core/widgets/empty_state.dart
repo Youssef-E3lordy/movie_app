@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_assets.dart';
-
+import 'package:movie_app/core/utils/app_colors.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final String message;
-  final String? supMassage;
+  final String supMassage;
   final String? imagePath;
 
   const EmptyStateWidget({
@@ -29,23 +29,23 @@ class EmptyStateWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              "we are sorry, we can not find the movie :(",
+              message,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                  ),
+                color: AppColors.darkWhite,
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             SizedBox(height: 8),
             Text(
-              "Find your movie by Type title, categories, years, etc .",
+              supMassage,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.outlineVariant,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+                color: AppColors.grey,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),
