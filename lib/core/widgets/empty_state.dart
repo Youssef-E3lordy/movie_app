@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_assets.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 
 class EmptyStateWidget extends StatelessWidget {
   final String message;
@@ -31,7 +32,7 @@ class EmptyStateWidget extends StatelessWidget {
               message,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: AppColors.darkWhite,
                 fontSize: 22,
                 fontWeight: FontWeight.w600,
               ),
@@ -41,7 +42,7 @@ class EmptyStateWidget extends StatelessWidget {
               supMassage,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.outlineVariant,
+                color: AppColors.grey,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),

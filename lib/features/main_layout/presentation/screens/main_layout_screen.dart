@@ -4,6 +4,7 @@ import 'package:movie_app/core/utils/app_assets.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/features/search/presentation/view/screens/search_screen.dart';
 import 'package:movie_app/features/home/presentation/view/screens/home_screen.dart';
+import 'package:movie_app/features/watch_list/presentation/screens/watchlist_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class MainLayoutScreen extends StatefulWidget {
@@ -29,10 +30,8 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   List<Widget> _buildScreens() {
     return const [
       Home(),
-      SearchScreen(),
-      Center(
-        child: Text('Watchlist Screen', style: TextStyle(color: Colors.white)),
-      ),
+      SearchScreen(),   
+      WatchlistScreen(),
     ];
   }
 
@@ -41,8 +40,8 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           AppAssets.iconHome,
-          width: 24,
-          height: 24,
+          width: 30,
+          height: 30,
           colorFilter: const ColorFilter.mode(
             AppColors.primary,
             BlendMode.srcIn,
@@ -50,19 +49,20 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         ),
         inactiveIcon: SvgPicture.asset(
           AppAssets.iconHome,
-          width: 24,
-          height: 24,
+          width: 30,
+          height: 30,
           colorFilter: const ColorFilter.mode(AppColors.grey, BlendMode.srcIn),
         ),
         title: "Home",
-        activeColorPrimary: AppColors.primary,
+        activeColorSecondary: AppColors.lightDark,
+        activeColorPrimary: AppColors.secondary,
         inactiveColorPrimary: AppColors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           AppAssets.iconSearch,
-          width: 24,
-          height: 24,
+          width: 30,
+          height: 30,
           colorFilter: const ColorFilter.mode(
             AppColors.primary,
             BlendMode.srcIn,
@@ -70,19 +70,20 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         ),
         inactiveIcon: SvgPicture.asset(
           AppAssets.iconSearch,
-          width: 24,
-          height: 24,
+          width: 30,
+          height: 30,
           colorFilter: const ColorFilter.mode(AppColors.grey, BlendMode.srcIn),
         ),
         title: "Search",
-        activeColorPrimary: AppColors.primary,
+        activeColorSecondary: AppColors.lightDark,
+        activeColorPrimary: AppColors.secondary,
         inactiveColorPrimary: AppColors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: SvgPicture.asset(
           AppAssets.iconBookmark,
-          width: 24,
-          height: 24,
+          width: 30,
+          height: 30,
           colorFilter: const ColorFilter.mode(
             AppColors.primary,
             BlendMode.srcIn,
@@ -90,12 +91,13 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         ),
         inactiveIcon: SvgPicture.asset(
           AppAssets.iconBookmark,
-          width: 24,
-          height: 24,
+          width: 30,
+          height: 30,
           colorFilter: const ColorFilter.mode(AppColors.grey, BlendMode.srcIn),
         ),
         title: "Watch list",
-        activeColorPrimary: AppColors.primary,
+        activeColorSecondary: AppColors.lightDark,
+        activeColorPrimary: AppColors.secondary,
         inactiveColorPrimary: AppColors.grey,
       ),
     ];
@@ -125,7 +127,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
           screenTransitionAnimationType: ScreenTransitionAnimationType.fadeIn,
         ),
       ),
-      navBarStyle: NavBarStyle.style6,
+      navBarStyle: NavBarStyle.style7,
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/network/api_constant.dart';
+import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/widgets/app_cached_image.dart';
 import 'package:movie_app/features/home/domain/use_case/get_popular_movies_use_case.dart';
 import 'package:movie_app/features/home/domain/use_case/get_release_movies_use_case.dart';
@@ -36,6 +37,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: BlocBuilder<HomeCubit, HomeState>(
           bloc: _cubit,
           builder: (context, state) {
@@ -50,12 +52,16 @@ class _HomeState extends State<Home> {
                       height: 250,
 
                       child: ListView.builder(
-                        itemCount: state.topRatedMovies.length,
+                        itemCount: state.topRatedMovies.length > 10
+                            ? 10
+                            : state.topRatedMovies.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Container(
                             margin: EdgeInsets.only(right: 8),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
@@ -65,13 +71,56 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               },
-                              child: AppCachedImage(
-                                imageUrl: ApiConstants.getFullImageUrl(
-                                  state.topRatedMovies[index].posterPath,
+                              child: SizedBox(
+                                height: 250,
+                                width: 180,
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: AppCachedImage(
+                                        imageUrl: ApiConstants.getFullImageUrl(
+                                          state
+                                              .topRatedMovies[index]
+                                              .posterPath,
+                                        ),
+                                        height: 240,
+                                        width: 150,
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                    ),
+
+                                    Positioned(
+                                      left: 0,
+                                      bottom: -40,
+                                      child: Stack(
+                                        children: [
+                                          Text(
+                                            '${index + 1}',
+                                            style: TextStyle(
+                                              fontSize: 110,
+                                              fontWeight: FontWeight.w900,
+                                              color: AppColors.background,
+                                            ),
+                                          ),
+
+                                          Text(
+                                            '${index + 1}',
+                                            style: TextStyle(
+                                              fontSize: 110,
+                                              fontWeight: FontWeight.w900,
+                                              foreground: Paint()
+                                                ..style = PaintingStyle.stroke
+                                                ..strokeWidth = 1
+                                                ..color = AppColors.outLineText,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                height: 210,
-                                width: 140,
-                                borderRadius: BorderRadius.circular(16),
                               ),
                             ),
                           );
@@ -90,6 +139,8 @@ class _HomeState extends State<Home> {
                           return Container(
                             margin: EdgeInsets.only(right: 8),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
@@ -100,13 +151,18 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               },
-                              child: AppCachedImage(
-                                imageUrl: ApiConstants.getFullImageUrl(
-                                  state.releaseRatedMovies[index].posterPath,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  left: index == 0 ? 8 : 0,
+                                ), // Add left padding to the first item
+                                child: AppCachedImage(
+                                  imageUrl: ApiConstants.getFullImageUrl(
+                                    state.releaseRatedMovies[index].posterPath,
+                                  ),
+                                  height: 240,
+                                  width: 145,
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                height: 210,
-                                width: 140,
-                                borderRadius: BorderRadius.circular(16),
                               ),
                             ),
                           );
@@ -129,6 +185,8 @@ class _HomeState extends State<Home> {
                         ),
                         itemBuilder: (context, index) {
                           return InkWell(
+                            splashColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
@@ -138,11 +196,18 @@ class _HomeState extends State<Home> {
                                 ),
                               );
                             },
-                            child: AppCachedImage(
-                              imageUrl: ApiConstants.getFullImageUrl(
-                                state.popularMovies[index].posterPath,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                left: index == 0 ? 8 : 0,
                               ),
-                              borderRadius: BorderRadius.circular(16),
+                              child: AppCachedImage(
+                                imageUrl: ApiConstants.getFullImageUrl(
+                                  state.popularMovies[index].posterPath,
+                                ),
+                                height: 240,
+                                width: 145,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                             ),
                           );
                         },

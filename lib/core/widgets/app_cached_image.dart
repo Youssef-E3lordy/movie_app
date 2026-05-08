@@ -29,9 +29,7 @@ class AppCachedImage extends StatelessWidget {
         width: width,
         height: height,
         color: Theme.of(context).colorScheme.surface,
-        // child: Center(
-        //   child: CircularProgressIndicator(),
-        // ),
+        
       ),
       errorWidget: (context, url, error) => Container(
         width: width,
