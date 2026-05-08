@@ -35,7 +35,8 @@ class WatchlistScreen extends StatelessWidget {
             if (state.movies.isEmpty) {
               return const EmptyStateWidget(
                 message: 'There is no movie yet!',
-                supMassage: 'Find your movie by Type title, categories, years, etc',
+                supMassage:
+                    'Find your movie by Type title, categories, years, etc',
                 imagePath: AppAssets.imgFolder,
               );
             }
@@ -45,7 +46,7 @@ class WatchlistScreen extends StatelessWidget {
               itemCount: state.movies.length,
               itemBuilder: (context, index) {
                 final movie = state.movies[index];
-                
+
                 return Dismissible(
                   key: Key(movie.id.toString()),
                   direction: DismissDirection.endToStart,
@@ -60,7 +61,11 @@ class WatchlistScreen extends StatelessWidget {
                       color: AppColors.error,
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: const Icon(Icons.delete_outline, color: AppColors.textPrimary, size: 30),
+                    child: const Icon(
+                      Icons.delete_outline,
+                      color: AppColors.textPrimary,
+                      size: 30,
+                    ),
                   ),
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 24),
@@ -68,7 +73,8 @@ class WatchlistScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppCachedImage(
-                          imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                          imageUrl:
+                              'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                           width: 105,
                           height: 155,
                           borderRadius: BorderRadius.circular(16),
@@ -90,13 +96,20 @@ class WatchlistScreen extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 12),
-                              _buildInfoRow(AppAssets.star, '9.5', isRating: true),
+                              _buildInfoRow(
+                                AppAssets.star,
+                                movie.rating.toStringAsFixed(1),
+                                isRating: true,
+                              ),
                               const SizedBox(height: 6),
-                              _buildInfoRow(AppAssets.ticket, 'Action'),
+                              _buildInfoRow(AppAssets.ticket, movie.genre),
                               const SizedBox(height: 6),
-                              _buildInfoRow(AppAssets.calendarBlank, '2019'),
+                              _buildInfoRow(
+                                AppAssets.calendarBlank,
+                                movie.releaseYear,
+                              ),
                               const SizedBox(height: 6),
-                              _buildInfoRow(AppAssets.clock, '139 minutes'),
+                              _buildInfoRow(AppAssets.clock, movie.runtime),
                             ],
                           ),
                         ),
@@ -121,7 +134,7 @@ class WatchlistScreen extends StatelessWidget {
           width: 16,
           height: 16,
           colorFilter: ColorFilter.mode(
-            isRating ? AppColors.star : AppColors.textSecondary, 
+            isRating ? AppColors.star : AppColors.textSecondary,
             BlendMode.srcIn,
           ),
         ),

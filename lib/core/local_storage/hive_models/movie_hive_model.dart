@@ -13,9 +13,25 @@ class MovieHiveModel extends HiveObject {
   @HiveField(2)
   final String posterPath;
 
+  @HiveField(3)
+  final double rating;
+
+  @HiveField(4)
+  final String genre;
+
+  @HiveField(5)
+  final String releaseYear;
+
+  @HiveField(6)
+  final String runtime;
+
   MovieHiveModel({
     required this.id,
     required this.title,
     required this.posterPath,
+    required this.rating,
+    required this.genre,
+    required this.releaseYear,
+    required this.runtime,
   });
 }

@@ -20,19 +20,31 @@ class MovieHiveModelAdapter extends TypeAdapter<MovieHiveModel> {
       id: fields[0] as int,
       title: fields[1] as String,
       posterPath: fields[2] as String,
+      rating: fields[3] as double,
+      genre: fields[4] as String,
+      releaseYear: fields[5] as String,
+      runtime: fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, MovieHiveModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.posterPath);
+      ..write(obj.posterPath)
+      ..writeByte(3)
+      ..write(obj.rating)
+      ..writeByte(4)
+      ..write(obj.genre)
+      ..writeByte(5)
+      ..write(obj.releaseYear)
+      ..writeByte(6)
+      ..write(obj.runtime);
   }
 
   @override

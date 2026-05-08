@@ -63,6 +63,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           id: widget.movieId,
                           title: detailsState.data.title,
                           posterPath: detailsState.data.posterPath,
+                          rating: detailsState.data.voteAverage,
+                          genre: detailsState.data.genres.isNotEmpty
+                              ? detailsState.data.genres.first
+                              : 'Action',
+                          releaseYear: detailsState.data.releaseDate.isNotEmpty
+                              ? detailsState.data.releaseDate.split("-").first
+                              : '',
+                          runtime: '${detailsState.data.runtime} minutes',
                         );
                         context.read<WatchlistCubit>().toggleWatchlist(
                           movieToSave,
